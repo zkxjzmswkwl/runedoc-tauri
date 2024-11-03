@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ButtonModule, BadgeModule, AvatarModule, MenuModule, SidebarModule, DividerModule],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.css'
+  styleUrl: './sidenav.component.css',
 })
 export class SidenavComponent implements OnInit {
   public items: MenuItem[] | undefined;
@@ -30,7 +30,7 @@ export class SidenavComponent implements OnInit {
     this.items = [
       { label: 'Home', icon: 'pi pi-home', command: () => this.router.navigate(['/home']) },
       { label: 'Client', icon: 'pi pi-desktop', command: () => this.router.navigate(['/client']) },
-      { label: 'Settings', icon: 'pi pi-cog', command: () => this.router.navigate(['/settings']) }
+      { label: 'Settings', icon: 'pi pi-cog', command: () => this.router.navigate(['/settings']) },
     ];
   }
 }

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './client.component.html',
-  styleUrl: './client.component.css'
+  styleUrl: './client.component.css',
 })
 export class ClientComponent {
 
