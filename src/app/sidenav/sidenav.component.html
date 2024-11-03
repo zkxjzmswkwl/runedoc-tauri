@@ -1,0 +1,67 @@
+<div class="sidenav-containershit fixed left-0 top-0 bottom-0">
+    <p-menu [model]="items" class="flex justify-center h-full w-full min-h-full border-none">
+        <ng-template pTemplate="start">
+            <span class="inline-flex items-center gap-1 px-2 py-2">
+                <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg" class="block mx-auto">
+                    <path d="..." fill="var(--primary-color)" />
+                    <mask id="mask0_1_36" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="33">
+                        <path d="..." fill="var(--primary-color-text)" />
+                    </mask>
+                    <g mask="url(#mask0_1_36)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="..." fill="var(--primary-color)" />
+                    </g>
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="..."
+                        fill="var(--primary-color-text)"
+                    />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="..."
+                        fill="var(--primary-color-text)"
+                    />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path d="..." fill="var(--primary-color-text)" />
+                    <path d="..." fill="var(--primary-color-text)" />
+                </svg>
+                <span class="text-xl font-semibold">
+                    Rune<span class="text-primary">Doc</span>
+                </span>
+                <span class="text-sm italic">v6.9</span>
+            </span>
+            <p-divider/>
+        </ng-template>
+        <ng-template pTemplate="submenuheader" let-item>
+            <span class="text-primary font-bold">{{ item.label }}</span>
+        </ng-template>
+        <ng-template pTemplate="item" let-item>
+            <a pRipple class="flex items-center p-menu-item-link">
+                <span [class]="item.icon"></span>
+                <span class="ml-2">{{ item.label }}</span>
+                <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+                <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">
+                    {{ item.shortcut }}
+                </span>
+            </a>
+        </ng-template>
+        <ng-template pTemplate="end">
+            <!-- This is bad -->
+            <div class="fixed bottom-2">
+                <button pRipple class="relative overflow-hidden w-full border-0 bg-transparent flex items-start p-2 pl-4 hover:bg-surface-100 dark:hover:bg-surface-800 rounded-none cursor-pointer transition-colors duration-200">
+                    <p-avatar image="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/82914cd9-fa5d-4971-8e5a-a2268a65c8e6/dgygsm1-637d4e3a-2afa-4ed1-8a47-b579b6e4687c.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzgyOTE0Y2Q5LWZhNWQtNDk3MS04ZTVhLWEyMjY4YTY1YzhlNlwvZGd5Z3NtMS02MzdkNGUzYS0yYWZhLTRlZDEtOGE0Ny1iNTc5YjZlNDY4N2MuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.v4XrqTY_YYqXMwP9ai1ptg2fu641rjORvbXJHWQW0cw" class="mr-2" shape="circle" />
+                    <span class="inline-flex flex-col">
+                        <span class="font-bold">Ryan Gosling 69</span>
+                        <span class="text-sm">Literally Me</span>
+                    </span>
+                </button>
+            </div>
+        </ng-template>
+    </p-menu>
+</div>
