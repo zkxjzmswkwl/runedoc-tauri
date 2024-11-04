@@ -1,3 +1,10 @@
 <div class="card">
-  <p-chart #chart type="line" [data]="data" [options]="options" class="h-[30rem]" />
+  <p-chart
+    #chart type="line"
+    [data]="{ 
+      datasets: datasets$ | async,
+      labels: labels$ | async
+    }"
+    [options]="options" class="h-[30rem]"
+  />
 </div>
