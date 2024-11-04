@@ -30,6 +30,16 @@ body {
 
 .p-button {
   border-radius: 0.25rem !important;
+  padding: 0.25rem .5rem !important;
+  font-size: 0.85rem !important;
+  margin: 0 !important;
+}
+
+.rd-grouping {
+  border: 1px solid #3f3f46;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: 1rem;
 }
 
 .p-menu {

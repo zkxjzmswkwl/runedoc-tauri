@@ -29,7 +29,8 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       { label: 'Home', icon: 'pi pi-home', command: () => this.router.navigate(['/home']) },
-      { label: 'Client', icon: 'pi pi-desktop', command: () => this.router.navigate(['/client']) },
+      { label: 'Debug', icon: 'pi pi-code', command: () => this.router.navigate(['/client']) },
+      { label: 'Metrics', icon: 'pi pi-chart-bar', command: () => this.router.navigate(['/tracker']) },
       { label: 'Settings', icon: 'pi pi-cog', command: () => this.router.navigate(['/settings']) },
     ];
   }
