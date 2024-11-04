@@ -14,13 +14,13 @@ import { queuePacket } from '../../../icp-events/events';
   styleUrl: './silhouette-controller.component.css'
 })
 export class SilhouetteControllerComponent {
-  red: number = 1045353216;
-  green: number = 1045353216;
-  blue: number = 1045353216;
+  red = 1045353216;
+  green = 1045353216;
+  blue = 1045353216;
 
   async applySilhouette() {
-    queuePacket("cmd", "red", this.red.toString());
-    queuePacket("cmd", "green", this.green.toString());
-    queuePacket("cmd", "blue", this.blue.toString());
+    queuePacket("cmd", "red", `${this.red}`);
+    queuePacket("cmd", "green", `${this.green}`);
+    queuePacket("cmd", "blue", `${this.blue}`);
   }
 }
