@@ -1,6 +1,6 @@
 <div class="bg-[#18181b] rd-header w-auto h-[52px] border-b-[1px] border-[#3e3e44] p-2">
   <div class="flex flex-row space-x-4 md:space-x-8 justify-end">
-    @for (account of stateManager.get("accounts"); track account) {
+    @for (account of (accounts$ | async); track account) {
       <!--
           TODO: Vertically center these fucks so when neither md/lg are triggered shit doesn't look fucked.
       -->
