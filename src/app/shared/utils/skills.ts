@@ -62,18 +62,17 @@ export const SkillColors: { [key: number]: string } = {
   [Skill.NECROMANCY]: '#2E2B5F',
 };
 
-export const SkillNames = [
-  "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic",
-  "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting",
-  "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming",
-  "Runecrafting", "Hunter", "Construction", "Summoning", "Dungeoneering",
-  "Divination", "Invention", "Archaeology", "Necromancy"
-];
+export const SkillNames = [  'Attack', 'Defence', 'Strength', 'Hitpoints', 'Ranged', 'Prayer', 'Magic',
+  'Cooking', 'Woodcutting', 'Fletching', 'Fishing', 'Firemaking', 'Crafting',
+  'Smithing', 'Mining', 'Herblore', 'Agility', 'Thieving', 'Slayer', 'Farming',
+  'Runecrafting', 'Hunter', 'Construction', 'Summoning', 'Dungeoneering',
+  'Divination', 'Invention', 'Archaeology', 'Necromancy',
+] as const;
 
 export function getColorForSkill(skillId: number): string {
   return SkillColors[skillId] || '#000000';
 }
 
-export function convertSkillToFormattedString(skillId: number): string {
+export function convertSkillToFormattedString(skillId: number): typeof SkillNames[number] | `Skill {number}` {
   return SkillNames[skillId] || `Skill ${skillId}`;
 }

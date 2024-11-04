@@ -1,12 +1,12 @@
-import {Component, inject, ViewChild} from '@angular/core';
-import {ButtonModule} from 'primeng/button';
-import {BadgeModule} from 'primeng/badge';
-import {AvatarModule} from 'primeng/avatar';
-import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
-import {Sidebar, SidebarModule} from 'primeng/sidebar';
-import {DividerModule} from 'primeng/divider';
-import {Router} from '@angular/router';
+import { Component, inject, ViewChild } from '@angular/core';
+import { ButtonModule } from 'primeng/button';
+import { BadgeModule } from 'primeng/badge';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
+import { Sidebar, SidebarModule } from 'primeng/sidebar';
+import { DividerModule } from 'primeng/divider';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -24,7 +24,7 @@ export class SidenavComponent {
     { label: 'Settings', icon: 'pi pi-cog', command: () => this.router.navigate(['/settings']) },
   ];
   public sidebarVisible = true;
-  
+
   @ViewChild('sidebarRef') sidebarRef!: Sidebar;
 
   closeCallback(e: Event): void {

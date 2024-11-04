@@ -1,4 +1,4 @@
-import { SkillData } from "./routes/tracker/skilldata";
+import { SkillData } from './routes/tracker/skilldata';
 
 export class StateManager {
   private static instance: StateManager;

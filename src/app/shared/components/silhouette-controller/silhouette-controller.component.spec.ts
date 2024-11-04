@@ -8,9 +8,9 @@ describe('SilhouetteControllerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SilhouetteControllerComponent]
+      imports: [SilhouetteControllerComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SilhouetteControllerComponent);
     component = fixture.componentInstance;

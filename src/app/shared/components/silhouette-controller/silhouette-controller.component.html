@@ -1,12 +1,12 @@
 <div class="rd-grouping mt-2">
-    <div class="flex flex-col justify-center space-y-8  h-full">
-        <div class="descriptor flex flex-col space-y-2">
-            <h1 class="text-white font-semibold text-xl">Silhouette</h1>
-            <p>Control the colour values of accessibility silhouettes.</p>
-        </div>
-        <p-slider [(ngModel)]="red" class="w-full" [min]="1045353216" [max]="1065353216"/>
-        <p-slider [(ngModel)]="green" class="w-full" [min]="1045353216" [max]="1065353216"/>
-        <p-slider [(ngModel)]="blue" class="w-full" [min]="1045353216" [max]="1065353216"/>
-        <p-button (click)="applySilhouette()" class="w-56">Apply</p-button>
+  <div class="flex flex-col justify-center space-y-8  h-full">
+    <div class="descriptor flex flex-col space-y-2">
+      <h1 class="text-white font-semibold text-xl">Silhouette</h1>
+      <p>Control the colour values of accessibility silhouettes.</p>
     </div>
+    <p-slider [(ngModel)]="red" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-slider [(ngModel)]="green" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-slider [(ngModel)]="blue" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-button (click)="applySilhouette()" class="w-56">Apply</p-button>
+  </div>
 </div>
