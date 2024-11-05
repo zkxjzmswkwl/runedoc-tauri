@@ -8,16 +8,14 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [FormsModule, ButtonModule],
   templateUrl: './entity-hider.component.html',
-  styleUrl: './entity-hider.component.css'
+  styleUrl: './entity-hider.component.css',
 })
 export class EntityHiderComponent {
-
-
   hideEntities() {
-    queuePacket("req", "hideentities", "entity");
+    queuePacket('req', 'hideentities', 'entity');
   }
 
   hideNpc() {
-    queuePacket("req", "hideentities", "npc");
+    queuePacket('req', 'hideentities', 'npc');
   }
 }

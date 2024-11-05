@@ -8,9 +8,9 @@ describe('EntityHiderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EntityHiderComponent]
+      imports: [EntityHiderComponent],
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EntityHiderComponent);
     component = fixture.componentInstance;

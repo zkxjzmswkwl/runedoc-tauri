@@ -1,6 +1,8 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SilhouetteControllerComponent } from "../../shared/components/silhouette-controller/silhouette-controller.component";
-import { EntityHiderComponent } from "../../shared/components/entity-hider/entity-hider.component";
+import {
+  SilhouetteControllerComponent,
+} from '../../shared/components/silhouette-controller/silhouette-controller.component';
+import { EntityHiderComponent } from '../../shared/components/entity-hider/entity-hider.component';
 
 @Component({
   selector: 'app-client',
