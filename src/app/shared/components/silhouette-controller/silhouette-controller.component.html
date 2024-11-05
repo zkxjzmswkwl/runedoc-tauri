@@ -4,8 +4,10 @@
       <h1 class="text-white font-semibold text-xl">Silhouette</h1>
       <p>Control the colour values of accessibility silhouettes.</p>
     </div>
-    <p-slider [formControl]="red" class="w-full" [min]="1045353216" [max]="1065353216" />
-    <p-slider [formControl]="green" class="w-full" [min]="1045353216" [max]="1065353216" />
-    <p-slider [formControl]="blue" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-slider [formControl]="red" class="w-full" [step]="0.01" [min]="0" [max]="1" />
+    <p-slider [formControl]="green" class="w-full" [step]="0.01" [min]="0" [max]="1" />
+    <p-slider [formControl]="blue" class="w-full" [step]="0.01" [min]="0" [max]="1" />
+    <p-slider [formControl]="opacity" class="w-full" [step]="0.01" [min]="0" [max]="1.0" />
+    <p-slider [formControl]="width" class="w-full" [step]="0.10" [min]="0" [max]="4000.0" />
   </div>
 </div>

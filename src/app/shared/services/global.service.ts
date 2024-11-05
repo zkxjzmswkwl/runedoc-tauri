@@ -17,6 +17,8 @@ export class GlobalService {
       queuePacket('cmd', 'red', `${colors.red}`);
       queuePacket('cmd', 'green', `${colors.green}`);
       queuePacket('cmd', 'blue', `${colors.blue}`);
+      queuePacket('cmd', 'opacity', `${colors.opacity}`);
+      queuePacket('cmd', 'width', `${colors.width}`);
     }));
   readonly state$ = this.store.select(GlobalFeature.selectGlobalFeatureState);
 

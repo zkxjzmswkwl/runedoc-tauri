@@ -21,6 +21,8 @@ export class SilhouetteControllerComponent implements OnInit {
   readonly red = new FormControl(1045353216, { nonNullable: true });
   readonly green = new FormControl(1045353216, { nonNullable: true });
   readonly blue = new FormControl(1045353216, { nonNullable: true });
+  readonly opacity = new FormControl(0, {nonNullable: true });
+  readonly width = new FormControl(0, {nonNullable: true });
 
   ngOnInit() {
     this.globalService.silhouette$
@@ -29,6 +31,8 @@ export class SilhouetteControllerComponent implements OnInit {
         this.red.setValue(colors.red, { emitEvent: false });
         this.green.setValue(colors.green, { emitEvent: false });
         this.blue.setValue(colors.blue, { emitEvent: false });
+        this.opacity.setValue(colors.opacity, { emitEvent: false });
+        this.width.setValue(colors.width, { emitEvent: false });
       });
 
     this.red.valueChanges
@@ -42,5 +46,13 @@ export class SilhouetteControllerComponent implements OnInit {
     this.blue.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(blue => this.globalService.updateColors({ blue }));
+
+    this.opacity.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(opacity => this.globalService.updateColors({ opacity }));
+
+    this.width.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(width => this.globalService.updateColors({ width }));
   }
 }

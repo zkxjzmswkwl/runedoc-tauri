@@ -4,6 +4,8 @@ export type Silhouette = {
   red: number;
   green: number;
   blue: number;
+  opacity: number;
+  width: number;
 };
 
 export type GlobalFeatureState = {
@@ -17,6 +19,8 @@ const initialState: GlobalFeatureState = {
     red: 1045353216,
     green: 1045353216,
     blue: 1045353216,
+    opacity: 1.0,
+    width: 1.0
   },
 };
 
