@@ -4,9 +4,8 @@
       <h1 class="text-white font-semibold text-xl">Silhouette</h1>
       <p>Control the colour values of accessibility silhouettes.</p>
     </div>
-    <p-slider [(ngModel)]="red" class="w-full" [min]="1045353216" [max]="1065353216" />
-    <p-slider [(ngModel)]="green" class="w-full" [min]="1045353216" [max]="1065353216" />
-    <p-slider [(ngModel)]="blue" class="w-full" [min]="1045353216" [max]="1065353216" />
-    <p-button (click)="applySilhouette()" class="w-56">Apply</p-button>
+    <p-slider [formControl]="red" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-slider [formControl]="green" class="w-full" [min]="1045353216" [max]="1065353216" />
+    <p-slider [formControl]="blue" class="w-full" [min]="1045353216" [max]="1065353216" />
   </div>
 </div>
