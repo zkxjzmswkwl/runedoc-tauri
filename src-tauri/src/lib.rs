@@ -1,13 +1,16 @@
-use tauri::{async_runtime::spawn, AppHandle, Emitter, State};
-use tokio::sync::{Mutex, mpsc};
 use std::sync::Arc;
-use tokio::net::TcpStream;
+use tauri::{async_runtime::spawn, AppHandle, Emitter, State};
 use tokio::io::{AsyncReadExt, AsyncWriteExt, ReadHalf, WriteHalf};
+use tokio::net::TcpStream;
+use tokio::sync::{mpsc, Mutex};
 
 struct PacketSender(Arc<Mutex<Option<mpsc::UnboundedSender<String>>>>);
 
 #[tauri::command]
-async fn start_tcp_listener(app_handle: AppHandle, packet_sender: State<'_, PacketSender>) -> Result<(), String> {
+async fn start_tcp_listener(
+    app_handle: AppHandle,
+    packet_sender: State<'_, PacketSender>,
+) -> Result<(), String> {
     println!("start_tcp_listener");
 
     let (packet_tx, mut packet_rx) = mpsc::unbounded_channel::<String>();
@@ -47,7 +50,7 @@ async fn start_tcp_listener(app_handle: AppHandle, packet_sender: State<'_, Pack
                             if let Err(e) = app_handle.emit("packet_received", packet) {
                                 eprintln!("Failed to emit packet: {}", e);
                             }
-                        },
+                        }
                         Err(e) => {
                             eprintln!("Failed to read from stream: {}", e);
                             break;
@@ -56,7 +59,7 @@ async fn start_tcp_listener(app_handle: AppHandle, packet_sender: State<'_, Pack
                 }
 
                 send_task.await.unwrap();
-            },
+            }
             Err(e) => eprintln!("Failed to connect: {}", e),
         }
     });
@@ -65,11 +68,16 @@ async fn start_tcp_listener(app_handle: AppHandle, packet_sender: State<'_, Pack
 }
 
 #[tauri::command]
-async fn queue_outgoing_packet(packet: String, packet_sender: State<'_, PacketSender>) -> Result<(), String> {
+async fn queue_outgoing_packet(
+    packet: String,
+    packet_sender: State<'_, PacketSender>,
+) -> Result<(), String> {
     println!("{}", packet);
     let sender_lock = packet_sender.0.lock().await;
     if let Some(sender) = &*sender_lock {
-        sender.send(packet).map_err(|e| format!("Failed to enqueue packet: {}", e))
+        sender
+            .send(packet)
+            .map_err(|e| format!("Failed to enqueue packet: {}", e))
     } else {
         Err("Packet sender not initialized".to_string())
     }
@@ -78,9 +86,13 @@ async fn queue_outgoing_packet(packet: String, packet_sender: State<'_, PacketSe
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::new().build())
         .manage(PacketSender(Arc::new(Mutex::new(None))))
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![start_tcp_listener, queue_outgoing_packet])
+        .invoke_handler(tauri::generate_handler![
+            start_tcp_listener,
+            queue_outgoing_packet
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
