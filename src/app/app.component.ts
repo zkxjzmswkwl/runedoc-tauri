@@ -53,12 +53,15 @@ export class AppComponent {
 
     /**
      * combineLatest for future proofing multiple states.
+     * 
+     * Marshals stored application state from file on disk.
      */
     combineLatest([
       from(getFromStore<GlobalFeatureState>(this.settingsLocation, 'global_settings'))
     ])
       .pipe(takeUntilDestroyed())
       .subscribe(([globalState]) => {
+        console.log(globalState);
         this.globalService.updateState(globalState?.value ?? {});
       });
   }

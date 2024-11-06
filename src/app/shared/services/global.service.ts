@@ -25,6 +25,7 @@ export class GlobalService {
   constructor() {
     listen<string>('packet_received', (event) => {
       const buffer = event.payload;
+      console.log(buffer);
 
       if (!buffer.startsWith('resp:')) {
         return;
@@ -32,26 +33,17 @@ export class GlobalService {
 
       const spl = buffer.split(':');
 
-      if (spl.length < 3) {
-        console.log(spl);
-        return console.error('Received packet with no arguments.');
-      }
-
-      if (spl.length > 3) {
-        console.log(spl);
-        return console.error('Received packet with too many arguments.');
-      }
-
       if (spl[1] !== 'rsn') {
         return;
       }
 
       const rsn = spl[2];
-      this.addAccounts([rsn]);
+      setTimeout(() => {
+        this.setAccounts([rsn]);
+      }, 1000);
       getCurrentWindow().setTitle(rsn);
     });
   }
-
 
   /**
    * Used to override any passed in partial properties.
@@ -75,5 +67,9 @@ export class GlobalService {
    */
   addAccounts(accounts: string[]) {
     this.store.dispatch(GlobalFeatureActions.addAccounts({ accounts }));
+  }
+
+  setAccounts(accounts: string[]) : void {
+    this.store.dispatch(GlobalFeatureActions.setAccounts({ accounts }));
   }
 }

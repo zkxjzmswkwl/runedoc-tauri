@@ -16,9 +16,9 @@ export type GlobalFeatureState = {
 const initialState: GlobalFeatureState = {
   accounts: [],
   silhouette: {
-    red: 1045353216,
-    green: 1045353216,
-    blue: 1045353216,
+    red: 1.0,
+    green: 1.0,
+    blue: 1.0,
     opacity: 1.0,
     width: 1.0
   },
@@ -31,6 +31,7 @@ export const GlobalFeatureActions = createActionGroup({
     'Update': props<{ partial: Partial<GlobalFeatureState> }>(),
     'Update Colors': props<{ partial: Partial<GlobalFeatureState['silhouette']> }>(),
     'Add Accounts': props<{ accounts: string[] }>(),
+    'Set Accounts': props<{ accounts: string[] }>(),
   },
 });
 
@@ -53,6 +54,10 @@ export const GlobalFeature = createFeature({
     on(GlobalFeatureActions.addAccounts, (state, { accounts }) => ({
       ...state,
       accounts: [...state.accounts, ...accounts],
+    })),
+    on(GlobalFeatureActions.setAccounts, (state, { accounts }) => ({
+      ...state,
+      accounts,
     })),
   ),
 });

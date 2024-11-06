@@ -2,15 +2,14 @@ import { Component, DestroyRef, inject, NO_ERRORS_SCHEMA, OnInit } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { SliderModule } from 'primeng/slider';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { queuePacket } from '../../../icp-events/events';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GlobalService } from '../../services/global.service';
-import { combineLatest } from 'rxjs';
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 @Component({
   selector: 'app-silhouette-controller',
   standalone: true,
-  imports: [SliderModule, ButtonModule, FormsModule, ReactiveFormsModule],
+  imports: [SliderModule, ButtonModule, FormsModule, ReactiveFormsModule, ColorPickerModule],
   schemas: [NO_ERRORS_SCHEMA],
   templateUrl: './silhouette-controller.component.html',
   styleUrl: './silhouette-controller.component.css',
@@ -18,34 +17,18 @@ import { combineLatest } from 'rxjs';
 export class SilhouetteControllerComponent implements OnInit {
   private readonly globalService = inject(GlobalService);
   private readonly destroyRef = inject(DestroyRef);
-  readonly red = new FormControl(1045353216, { nonNullable: true });
-  readonly green = new FormControl(1045353216, { nonNullable: true });
-  readonly blue = new FormControl(1045353216, { nonNullable: true });
   readonly opacity = new FormControl(0, {nonNullable: true });
   readonly width = new FormControl(0, {nonNullable: true });
+  readonly color = new FormControl('#000000', {nonNullable: true});
 
   ngOnInit() {
     this.globalService.silhouette$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(colors => {
-        this.red.setValue(colors.red, { emitEvent: false });
-        this.green.setValue(colors.green, { emitEvent: false });
-        this.blue.setValue(colors.blue, { emitEvent: false });
+        this.color.setValue(this.toHex(colors.red, colors.green, colors.blue), { emitEvent: false });
         this.opacity.setValue(colors.opacity, { emitEvent: false });
         this.width.setValue(colors.width, { emitEvent: false });
       });
-
-    this.red.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(red => this.globalService.updateColors({ red }));
-
-    this.green.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(green => this.globalService.updateColors({ green }));
-
-    this.blue.valueChanges
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(blue => this.globalService.updateColors({ blue }));
 
     this.opacity.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -54,5 +37,23 @@ export class SilhouetteControllerComponent implements OnInit {
     this.width.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(width => this.globalService.updateColors({ width }));
+    
+    this.color.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(color => this.globalService.updateColors(this.fromHex(color)));
+  }
+
+  private fromHex(hex: string) : { red: number, green: number, blue: number } {
+    const red = parseInt(hex.substring(1, 3), 16) / 255;
+    const green = parseInt(hex.substring(3, 5), 16) / 255;
+    const blue = parseInt(hex.substring(5, 7), 16) / 255;
+    return { red, green, blue };
+  }
+
+  private toHex(red: number, green: number, blue: number) : string {
+    const r = Math.round(red * 255).toString(16).padStart(2, '0');
+    const g = Math.round(green * 255).toString(16).padStart(2, '0');
+    const b = Math.round(blue * 255).toString(16).padStart(2, '0');
+    return `#${r}${g}${b}`;
   }
 }
