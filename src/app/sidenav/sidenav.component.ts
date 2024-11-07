@@ -21,6 +21,7 @@ export class SidenavComponent {
     { label: 'Home', icon: 'pi pi-home', command: () => this.router.navigate(['/home']) },
     { label: 'Debug', icon: 'pi pi-code', command: () => this.router.navigate(['/client']) },
     { label: 'Metrics', icon: 'pi pi-chart-bar', command: () => this.router.navigate(['/tracker']) },
+    { label: 'Warden', icon: 'pi pi-sun', command: () => this.router.navigate(['/afkwarden']) },
     { label: 'Settings', icon: 'pi pi-cog', command: () => this.router.navigate(['/settings']) },
   ];
   public sidebarVisible = true;

@@ -7,6 +7,7 @@ import { provideStore, StoreModule } from '@ngrx/store';
 import { SkillsFeature } from './shared/state/skills.feature';
 import { BrowserModule } from '@angular/platform-browser';
 import { GlobalFeature } from './shared/state/global.feature';
+import { AFKWardenFeature } from './shared/state/afkwarden.feature';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       StoreModule.forRoot({}),
       StoreModule.forFeature(SkillsFeature),
       StoreModule.forFeature(GlobalFeature),
+      StoreModule.forFeature(AFKWardenFeature)
     ),
   ],
 };
