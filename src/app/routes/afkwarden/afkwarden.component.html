@@ -12,7 +12,7 @@
                     <tr>
                         <th>Message</th>
                         <th>Alert Type</th>
-                        <!-- <th>Timestamp</th> -->
+                        <th></th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -22,8 +22,10 @@
                             {{ rowData.message }}
                         </td>
                         <td>{{ rowData.alertType }}</td>
+                        <td><p-button icon="pi pi-pencil" rounded="true" /></td>
                     </tr>
                 </ng-template>
+                
             </p-treetable>
         </div>
 

@@ -8,6 +8,7 @@ import { SkillsFeature } from './shared/state/skills.feature';
 import { BrowserModule } from '@angular/platform-browser';
 import { GlobalFeature } from './shared/state/global.feature';
 import { AFKWardenFeature } from './shared/state/afkwarden.feature';
+import { SceneObjectsFeature } from './shared/state/sceneobjects.feature';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +20,8 @@ export const appConfig: ApplicationConfig = {
       StoreModule.forRoot({}),
       StoreModule.forFeature(SkillsFeature),
       StoreModule.forFeature(GlobalFeature),
-      StoreModule.forFeature(AFKWardenFeature)
+      StoreModule.forFeature(AFKWardenFeature),
+      StoreModule.forFeature(SceneObjectsFeature)
     ),
   ],
 };

@@ -1,0 +1,33 @@
+<div class="sceneobjects rd-grouping">
+    <div class="grid grid-cols-5 grid-rows-6969 gap-x-2 gap-y-2">
+        <h1 class="text-xl col-span-5 font-semibold">Scene</h1>
+        <!-- <p-button pButton (click)="queryScene()">Query Scene</p-button> -->
+        <button pButton pRipple label="Query" (click)="queryScene()"></button>
+
+        <div class="col-span-5">
+            <p-treetable [value]="sceneObjects" [scrollable]="true" [tableStyle]="{'min-width':'20rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Name</th>
+                        <th>Combat Lv.</th>
+                        <th>Server Idx.</th>
+                        <th>Address</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                    <tr [ttRow]="rowNode">
+                        <td>
+                            <!-- <p-treetableToggler [rowNode]="rowNode" /> -->
+                            {{ rowData.name }}
+                        </td>
+                        <td>{{ rowData.combatLevel }}</td>
+                        <td>{{ rowData.serverIndex }}</td>
+                        <td>0x{{ rowData.pointer.toString(16) | uppercase}}</td>
+                    </tr>
+                </ng-template>
+                
+            </p-treetable>
+        </div>
+
+    </div>
+</div>
