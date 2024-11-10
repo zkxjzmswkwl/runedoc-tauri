@@ -29,7 +29,7 @@ export class TrackerComponent implements OnInit {
       // ignore empty arrays when reducing.
       filter(d => d.length > 0),
       map(datasets => datasets?.reduce((a, b) => a.data.length > b.data.length ? a : b) ?? []),
-      map(datasets => datasets.data.map((_, index) => `Second ${index + 1}`)),
+      map(datasets => datasets.data.map((_, index) => `${index + 1}`)),
     );
 
   options: any;

@@ -1,0 +1,28 @@
+<div class="rd-grouping mt-auto min-h-full">
+    <input pInputText class="col-span-4" [formControl]="newEntity" />
+    <p-button pButton (click)="addEntity()">
+        <i class="pi pi-plus" style="font-size: 1.25rem;"></i>
+    </p-button>
+    <p-table [value]="entities" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Entity</th>
+                <th>Colour</th>
+                <th>Width</th>
+                <th>Opacity</th>
+                <!-- <th>Quantity</th> -->
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entity>
+            <tr>
+                <td>{{ entity.name }}</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <!-- <td>
+                <p-badge [value]="product.quantity" [severity]="stockSeverity(product)" />
+            </td> -->
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
