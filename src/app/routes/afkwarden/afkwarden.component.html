@@ -1,33 +1,36 @@
 <div class="afkwarden rd-grouping mt-2">
-    <div class="grid grid-cols-5 grid-rows-6969 gap-x-2 gap-y-2">
-        <h1 class="text-3xl col-span-5 font-semibold">Warden</h1>
-        <input pInputText class="col-span-4" [formControl]="newMessage"/>
-        <p-button pButton (click)="addMessage()">
-            <i class="pi pi-plus" style="font-size: 1.25rem;"></i>
-        </p-button>
+  <div class="grid grid-cols-5 grid-rows-6969 gap-x-2 gap-y-2">
+    <h1 class="text-3xl col-span-5 font-semibold">Warden</h1>
+    <input pInputText class="col-span-4" [formControl]="newMessage" />
+    <p-button pButton (click)="addMessage()">
+      <i class="pi pi-plus" style="font-size: 1.25rem;"></i>
+    </p-button>
 
-        <div class="col-span-5">
-            <p-treetable  [value]="messages" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Message</th>
-                        <th>Alert Type</th>
-                        <th></th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-                    <tr [ttRow]="rowNode">
-                        <td>
-                            <p-treetableToggler [rowNode]="rowNode" />
-                            {{ rowData.message }}
-                        </td>
-                        <td>{{ rowData.alertType }}</td>
-                        <td><p-button icon="pi pi-pencil" rounded="true" /></td>
-                    </tr>
-                </ng-template>
-                
-            </p-treetable>
-        </div>
+    <div class="col-span-5">
+      <p-treetable [value]="(messages$ | async) ?? []" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Message</th>
+            <th>Alert Type</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+          <tr [ttRow]="rowNode">
+            <td>
+              <p-treetableToggler [rowNode]="rowNode" />
+              {{ rowData.message }}
+            </td>
+            <td>{{ rowData.alertType }}</td>
+            <td class="actions">
+              <p-button icon="pi pi-pencil" rounded="true" />
+              <button pButton type="button" label="Delete" class="p-button-danger" (click)="deleteAlert(rowData)"></button>
+            </td>
+          </tr>
+        </ng-template>
 
+      </p-treetable>
     </div>
+
+  </div>
 </div>
