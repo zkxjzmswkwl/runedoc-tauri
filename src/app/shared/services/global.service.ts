@@ -25,7 +25,6 @@ export class GlobalService {
   constructor() {
     listen<string>('packet_received', (event) => {
       const buffer = event.payload;
-      console.log(buffer);
 
       if (!buffer.startsWith('resp:')) {
         return;
@@ -69,7 +68,7 @@ export class GlobalService {
     this.store.dispatch(GlobalFeatureActions.addAccounts({ accounts }));
   }
 
-  setAccounts(accounts: string[]) : void {
+  setAccounts(accounts: string[]): void {
     this.store.dispatch(GlobalFeatureActions.setAccounts({ accounts }));
   }
 }

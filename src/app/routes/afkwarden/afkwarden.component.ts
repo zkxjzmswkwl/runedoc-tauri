@@ -4,9 +4,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TreeTableModule } from 'primeng/treetable';
-import { TreeNode } from 'primeng/api';
 import { queuePacket } from '../../icp-events/events';
-import { interval } from 'rxjs';
+import { interval, map } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { WatchedMessage } from '../../shared/state/afkwarden.feature';
 import { AsyncPipe } from '@angular/common';
@@ -17,38 +16,43 @@ import { AsyncPipe } from '@angular/common';
   schemas: [NO_ERRORS_SCHEMA],
   imports: [ButtonModule, InputTextModule, TreeTableModule, FormsModule, ReactiveFormsModule, AsyncPipe],
   templateUrl: './afkwarden.component.html',
-  styleUrl: './afkwarden.component.css'
+  styleUrl: './afkwarden.component.css',
 })
 export class AfkwardenComponent implements OnInit {
   private readonly wardenService = inject(AfkwardenService);
   private readonly destroyRef = inject(DestroyRef);
-  readonly messages$ = this.wardenService.messages$;
-  newMessage = new FormControl("", { nonNullable: false });
-  messages: TreeNode[] = [];
+  protected readonly messages$ = this.wardenService.messages$.pipe(map(messages => messages.map(m => this.toTreeNode(m))));
+  protected readonly newMessage = new FormControl('');
 
   ngOnInit(): void {
-    this.wardenService.queryWatchedMessages();
-    this.wardenService.messages$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(messages => {
-        this.messages = messages.map(m => this.toTreeNode(m));
-      });
-
+    // Uncommented to use localstorage for now...
     interval(400)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
+        // why not? for now just query with checkin too.
+        this.wardenService.queryWatchedMessages();
         queuePacket('_specpl_', 'afkwarden', 'checkin');
       });
   }
 
-  private toTreeNode(m: WatchedMessage): any {
-    return {
-      data: m,
-      children: [],
-    };
-  }
+  private toTreeNode = (m: WatchedMessage) => ({
+    data: m,
+    children: [],
+  });
 
   addMessage() {
-    queuePacket('_specpl_', 'afkwarden', 'addWatchedMessage', this.newMessage.value!);
+    const message = this.newMessage.value;
+
+    // .... if it's null who cares
+    if (!message) {
+      return;
+    }
+
+    this.wardenService.addMessage(message);
+    this.newMessage.setValue(null, { emitEvent: false });
+  }
+
+  deleteAlert(message: WatchedMessage) {
+    queuePacket('_specpl_', 'afkwarden', 'removeWatchedMessage', message.message);
   }
 }
