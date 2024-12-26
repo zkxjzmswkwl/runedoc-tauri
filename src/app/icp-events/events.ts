@@ -5,5 +5,5 @@ export function setupListeners() {
 }
 
 export function queuePacket(packetType: string, packetIdentifier: string, ...args: string[]) {
-  invoke('queue_outgoing_packet', { packet: `${packetType}:${packetIdentifier}:${args.join(':')}<dongs>` });
+  invoke('queue_outgoing_packet', { packet: `${packetType}:${packetIdentifier}:${args.join(':')}<EOL>` });
 }

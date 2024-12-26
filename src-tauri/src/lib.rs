@@ -26,7 +26,7 @@ async fn start_tcp_listener(
             Ok(stream) => {
                 let (mut read_half, mut write_half) = stream.into_split();
 
-                if let Err(e) = write_half.write_all(b"req:rsn<dongs>").await {
+                if let Err(e) = write_half.write_all(b"req:rsn<EOL>").await {
                     eprintln!("Failed to write initial message: {}", e);
                     return;
                 }
