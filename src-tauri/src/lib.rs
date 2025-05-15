@@ -21,7 +21,7 @@ async fn start_tcp_listener(
     }
 
     spawn(async move {
-        let addr = "127.0.0.1:6969";
+        let addr = "127.0.0.1:6970";
         match TcpStream::connect(addr).await {
             Ok(stream) => {
                 let (mut read_half, mut write_half) = stream.into_split();
